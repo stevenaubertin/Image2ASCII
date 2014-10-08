@@ -15,4 +15,4 @@ usage : image2ascii [args]
 * [-h <help>]           : Print this help message
 
 This script match a pixel for an ascii char. Thus most of the images will be very large.
-Use the rescale option should be use most of the time.
+The use of the rescale option is recommended.
