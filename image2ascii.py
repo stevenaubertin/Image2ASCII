@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import random
+from random import randint
 import sys
 import getopt
 from PIL import Image
@@ -74,13 +74,17 @@ def image2ascii(img=None, grayscale=None):
         bounds = [i * ratio for i in xrange(1, len(grayscale))]
 
         img = img.convert('L')
-        y, x = img.size
+        w, h = img.size
 
-        for j in range(y):
-            for i in range(x):
-                value = bisect(bounds, 255 - img.getpixel((i, j)))
-                candidate = grayscale[value]
-                data += candidate[random.randint(0, len(candidate) - 1)]
+        for i in range(w):
+            for j in range(h):
+                try:
+                    value = bisect(bounds, 255 - img.getpixel((i, j)))
+                    candidate = grayscale[value]
+                    data += candidate[randint(0, len(candidate) - 1)]
+                except:
+                    print 'error while trying to get pixel at ({0},{1})'.format(i,j)
+                    data = " "
             data += "\r\n"
 
     return data
